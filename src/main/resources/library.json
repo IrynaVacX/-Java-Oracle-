@@ -1,0 +1,38 @@
+[
+  {
+    "author": "D. Knuth",
+    "count": 2,
+    "title": "Art of programming"
+  },
+  {
+    "author": "Richter",
+    "count": 3,
+    "title": ".NET"
+  },
+  {
+    "date": "2023-09-25",
+    "title": "Newspaper Title"
+  },
+  {
+    "number": 2,
+    "count": 13,
+    "title": "Journal Title"
+  },
+  {
+    "date": "2023-09-25",
+    "title": "Washington Post"
+  },
+  {
+    "number": 1,
+    "count": 32,
+    "title": "Amogus"
+  },
+  {
+    "description": "Hologram-1",
+    "title": "hologram description 1"
+  },
+  {
+    "description": "Hologram-2",
+    "title": "hologram description 2"
+  }
+]
