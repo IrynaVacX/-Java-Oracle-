@@ -2,38 +2,57 @@ package step.learning.oop;
 
 import com.google.gson.JsonObject;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Serializable
-public class Book extends Literature implements Copyable, Printable, Multiple
+public class Newspaper extends Literature implements Periodic, Printable
 {
     @Required
-    private String author;
-    @Required
-    private int count;
-    public void setAuthor(String author)
+    private Date date;
+    private static final SimpleDateFormat cardFormat =
+            new SimpleDateFormat("dd.MM.yyyy");
+    private static final SimpleDateFormat sqldateFormat =
+        new SimpleDateFormat("yyyy-MM-dd");
+    public void setDate(Date date)
     {
-        this.author = author;
+        this.date = date;
     }
-    public String getAuthor()
+    public Date getDate()
     {
-        return this.author;
+        return this.date;
     }
-    public void setCount(int count)
+
+    public Newspaper(Date date, String title)
     {
-        this.count = count;
+        this.setDate(date);
+        super.setTitle(title);
+    }
+    public Newspaper(String date, String title) throws ParseException
+    {
+        this( sqldateFormat.parse(date), title);
+    }
+
+    @Override
+    public String getCard()
+    {
+        return String.format(
+                "Newspaper : '%s' from %s",
+                super.getTitle(),
+                cardFormat.format(this.getDate())
+        );
     }
     @Override
-    public int getCount()
+    public String getPeriod()
     {
-        return this.count;
+        return "N getPeriod";
     }
 
     private static List<String> requiredFieldsNames;
@@ -41,8 +60,8 @@ public class Book extends Literature implements Copyable, Printable, Multiple
     {
         if(requiredFieldsNames == null)
         {
-            Field[] fields = Book.class.getDeclaredFields();
-            Field[] fields2 = Book.class.getSuperclass().getDeclaredFields();
+            Field[] fields = Newspaper.class.getDeclaredFields();
+            Field[] fields2 = Newspaper.class.getSuperclass().getDeclaredFields();
             requiredFieldsNames = Stream.concat(
                             Arrays.stream(fields),
                             Arrays.stream(fields2))
@@ -57,30 +76,8 @@ public class Book extends Literature implements Copyable, Printable, Multiple
         requiredFieldsNames = _requiredFieldsNames;
     }
 
-    public Book(String author, String title)
-    {
-        this.setAuthor(author);
-        super.setTitle(title);
-    }
-    public Book(String author, int count, String title)
-    {
-        this.setAuthor(author);
-        this.setCount(count);
-        super.setTitle(title);
-    }
-    @Override
-    public String getCard()
-    {
-        return String.format(
-                "Book : %s '%s'  (x%s)",
-                this.getAuthor(),
-                super.getTitle(),
-                this.getCount()
-        );
-    }
-
     @FromJsonParser
-    public static Book fromJson(JsonObject jsonObject) throws ParseException
+    public static Newspaper fromJson(JsonObject jsonObject) throws ParseException
     {
         List<String> requiredFields = getRequiredFieldsNames();
         for(String field : requiredFields)
@@ -90,10 +87,9 @@ public class Book extends Literature implements Copyable, Printable, Multiple
                 throw new ParseException("Missing require field : " + field, 0);
             }
         }
-        return new Book(
+        return new Newspaper(
                 jsonObject.get(requiredFields.get(0)).getAsString(),
-                jsonObject.get(requiredFields.get(1)).getAsInt(),
-                jsonObject.get(requiredFields.get(2)).getAsString()
+                jsonObject.get(requiredFields.get(1)).getAsString()
         );
     }
     @ParseChecker
@@ -108,5 +104,4 @@ public class Book extends Literature implements Copyable, Printable, Multiple
         }
         return true;
     }
-
 }
