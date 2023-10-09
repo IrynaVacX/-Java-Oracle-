@@ -2,6 +2,9 @@ package step.learning;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import org.checkerframework.checker.units.qual.A;
+import step.learning.async.AsyncDemo;
+import step.learning.async.TaskDemo;
 import step.learning.basics.BasicsDemo;
 import step.learning.basics.FilesDemo;
 import step.learning.homeworks.HW_01;
@@ -23,16 +26,16 @@ public class App
         // HW-02
         // new HW_02().run();
 
-        OopDemo opd = new OopDemo();
+        // OopDemo opd = new OopDemo();
 
         // HW-03
         // opd.run();
 
         // HW-04
-        opd.HW_04_run();
+        // opd.HW_04_run();
 
         // HW-05
-        opd.HW_05_run();
+        // opd.HW_05_run();
 
         // CW
         //opd.run2();
@@ -41,10 +44,24 @@ public class App
         /////opd.run4();
 
         // CW - 29/09/23
-//        Injector injector = Guice.createInjector(new ConfigModule());
-//        IocDemo iocDemo = injector.getInstance(IocDemo.class);
-//        iocDemo.run();
+        // HW-07
+        Injector injector = Guice.createInjector(new ConfigModule());
+        IocDemo iocDemo = injector.getInstance(IocDemo.class);
+        iocDemo.run();
 
+        // CW - 02/09
+        //iocDemo.run();
 
+        //AsyncDemo ad = new AsyncDemo();
+        //ad.run();
+
+        //TaskDemo td = new TaskDemo();
+        //td.run();
+
+        // HW-08
+        new AsyncDemo().HW_08();
+
+        // HW-09
+        new AsyncDemo().HW_09();
     }
 }

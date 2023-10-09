@@ -1,4 +1,4 @@
-package step.learning.ioc;
+package step.learning.ioc.services.hash;
 
 public interface HashService
 {

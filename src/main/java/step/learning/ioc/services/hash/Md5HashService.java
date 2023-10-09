@@ -1,4 +1,6 @@
-package step.learning.ioc;
+package step.learning.ioc.services.hash;
+
+import step.learning.ioc.services.hash.HashService;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
