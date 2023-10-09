@@ -174,26 +174,29 @@ public class AsyncDemo
     }
 
     // HW-09
-    private final Object locker_hw_09 = new Object();
     private static final StringBuilder resultStrNum = new StringBuilder();
-    public void HW_09()
+    private static final int limit = 10;
+    private final CountDownLatch latch = new CountDownLatch(limit);
+    private final Object locker_hw_09 = new Object();
+    public void HW_09() throws InterruptedException
     {
         System.out.println("---------HW-09---------");
-        int limit = 9;
-        for(int i = 0; i <= limit; i++)
+
+        for(int i = 0; i < limit; i++)
         {
             final int num = i;
             Thread thread = new Thread(() -> {
                 synchronized (locker_hw_09)
                 {
                     resultStrNum.append(num);
-                    if(num == limit)
-                    {
-                        System.out.println(resultStrNum);
-                    }
+                    System.out.println("> " + num + " -> " + resultStrNum);
                 }
+                latch.countDown();
             });
             thread.start();
         }
+
+        latch.await();
+        System.out.println("Final result : " + resultStrNum);
     }
 }
