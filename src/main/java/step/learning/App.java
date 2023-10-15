@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import org.checkerframework.checker.units.qual.A;
 import step.learning.async.AsyncDemo;
 import step.learning.async.TaskDemo;
+import step.learning.async.hwAnnualInflation;
 import step.learning.basics.BasicsDemo;
 import step.learning.basics.FilesDemo;
 import step.learning.homeworks.HW_01;
@@ -44,23 +45,29 @@ public class App
 
         // CW - 29/09/23
         // HW-07
-        Injector injector = Guice.createInjector(new ConfigModule());
-        IocDemo iocDemo = injector.getInstance(IocDemo.class);
-        iocDemo.run();
+        // Injector injector = Guice.createInjector(new ConfigModule());
+        // IocDemo iocDemo = injector.getInstance(IocDemo.class);
+        // iocDemo.run();
 
         // CW - 02/09
-        //iocDemo.run();
+        // iocDemo.run();
 
-        //AsyncDemo ad = new AsyncDemo();
-        //ad.run();
+        // AsyncDemo ad = new AsyncDemo();
+        // ad.run();
 
-        //TaskDemo td = new TaskDemo();
-        //td.run();
+        // TaskDemo td = new TaskDemo();
+        // td.run();
 
         // HW-08
-        new AsyncDemo().HW_08();
+        // new AsyncDemo().HW_08();
 
         // HW-09
-        new AsyncDemo().HW_09();
+        // new AsyncDemo().HW_09();
+
+        // HW-10
+        Injector injector = Guice.createInjector(new ConfigModule());
+        hwAnnualInflation hw10 = injector.getInstance(hwAnnualInflation.class);
+        hw10.run();
+
     }
 }

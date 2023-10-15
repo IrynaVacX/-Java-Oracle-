@@ -68,7 +68,7 @@ public class AsyncDemo
                 activeThreadsCount--;
                 if(activeThreadsCount == 0)
                 {
-                    System.out.printf(Locale.US, "-----------%ntotal: %.2f%n", sum);
+                    System.out.printf(Locale.US, "-----------%n total: %.2f%n", sum);
                 }
             }
         }
